@@ -83,9 +83,11 @@ jobs:
                   releaseBody: 'See the assets to download this version and install.'
                   releaseDraft: true
                   prerelease: false
+            
             - name: Add Mac Universal Target
               if: matrix.platform == 'macos-latest'
-              run: rustup target add universal-apple-darwin
+              run: rustup target add aarch64-apple-darwin
+            
             - name: Tauri Build and Release (MacOS Universal Build)
               uses: tauri-apps/tauri-action@v0
               if: matrix.platform == 'macos-latest'
