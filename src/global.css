@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply text-white;
+    }
+
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+        @apply m-0;
+        -webkit-appearance: none;
+    }
+
+    a,
+    button,
+    input {
+        @apply rounded-md outline-none transition-colors ease-linear focus:outline-2 focus:outline-teal-500;
+    }
+
+    button {
+        @apply px-4 py-1;
+    }
+
+    button,
+    a {
+        @apply active:text-teal-500;
+    }
+}
