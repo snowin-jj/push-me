@@ -1,7 +1,11 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { appWindow } from '@tauri-apps/api/window';
-import { sendNotification } from '@tauri-apps/api/notification';
+import {
+    isPermissionGranted,
+    requestPermission,
+    sendNotification,
+} from '@tauri-apps/api/notification';
 
 type State = 'running' | 'paused' | 'break' | 'stopped';
 
@@ -35,6 +39,12 @@ export const useTimeStore = defineStore('time', () => {
     async function notify() {
         await appWindow.setFocus();
         await appWindow.setAlwaysOnTop(true);
+        let permissionGranted = await isPermissionGranted();
+
+        if (!permissionGranted) {
+            const permission = await requestPermission();
+            permissionGranted = permission === 'granted';
+        }
         sendNotification({
             title: 'Break Time',
             body: 'Take some time! , Go for a walk.',
