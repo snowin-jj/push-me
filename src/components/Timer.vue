@@ -13,7 +13,7 @@ onMounted(async () => {
 
 <template>
     <div class="flex flex-col gap-2 items-center justify-center">
-        <p class="text-4xl font-black flex items-center gap-2">
+        <p class="text-4xl md:text-6xl lg:text-8xl text-white font-black flex items-center gap-2">
             {{ timeStore.remainingMinutes }} : {{ timeStore.remainingSeconds }}
         </p>
         <div class="flex items-center gap-4">

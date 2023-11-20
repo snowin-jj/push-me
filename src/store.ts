@@ -1,13 +1,11 @@
-import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
-import { appWindow } from '@tauri-apps/api/window';
-import { appDataDir, join } from '@tauri-apps/api/path';
-import { convertFileSrc } from '@tauri-apps/api/tauri';
 import {
     isPermissionGranted,
     requestPermission,
     sendNotification,
 } from '@tauri-apps/api/notification';
+import { appWindow } from '@tauri-apps/api/window';
+import { defineStore } from 'pinia';
+import { computed, ref } from 'vue';
 
 type State = 'running' | 'paused' | 'break' | 'stopped';
 
@@ -38,23 +36,6 @@ export const useTimeStore = defineStore('time', () => {
         store.changeState('running');
     }
 
-    async function notify() {
-        await appWindow.setFocus();
-        await appWindow.setAlwaysOnTop(true);
-        let permissionGranted = await isPermissionGranted();
-
-        if (!permissionGranted) {
-            const permission = await requestPermission();
-            permissionGranted = permission === 'granted';
-        }
-        sendNotification({
-            icon: '/icons/32x32.png',
-            title: 'Break Time',
-            body: 'Take some time! , Go for a walk.',
-            sound: 'default',
-        });
-    }
-
     async function start() {
         if (store.state !== 'paused') {
             timeElapsed.value = minutes.value * 60;
@@ -67,6 +48,8 @@ export const useTimeStore = defineStore('time', () => {
             } else {
                 clearInterval(intervalId.value);
                 store.changeState('break');
+                await appWindow.setFocus();
+                await appWindow.setAlwaysOnTop(true);
                 await notify();
             }
         }, 1000);
@@ -78,14 +61,31 @@ export const useTimeStore = defineStore('time', () => {
         intervalId.value = undefined;
     }
 
-    function reset() {
+    async function reset() {
+        await appWindow.setAlwaysOnTop(false);
         timeElapsed.value = 0;
+        minutes.value = 0;
         if (intervalId.value !== undefined) {
             clearInterval(intervalId.value);
             intervalId.value = undefined;
         }
 
         store.changeState('stopped');
+    }
+
+    async function notify() {
+        let permissionGranted = await isPermissionGranted();
+
+        if (!permissionGranted) {
+            const permission = await requestPermission();
+            permissionGranted = permission === 'granted';
+        }
+        sendNotification({
+            icon: '/icons/32x32.png',
+            title: 'Break Time',
+            body: 'Take some time! , Go for a walk.',
+            sound: 'default',
+        });
     }
 
     // compute formatted time

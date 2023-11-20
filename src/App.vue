@@ -6,6 +6,7 @@ import Timer from './components/Timer.vue';
 import BreakMenu from './components/BreakMenu.vue';
 import TimeForm from './components/TimeForm.vue';
 import { onMounted, ref } from 'vue';
+import AppTitleBar from './components/AppTitleBar.vue';
 
 
 const bgColor = ref<"bg-transparent" | "bg-[#121212]">("bg-transparent")
@@ -21,6 +22,7 @@ onMounted(async () => {
 
 <template>
   <main data-tauri-drag-region class="relative min-h-[100dvh] grid place-items-center" :class="bgColor">
+    <AppTitleBar />
     <Timer v-if="store.state === 'running' || store.state === 'paused'" />
     <BreakMenu v-else-if="store.state === 'break'" />
     <TimeForm v-else />

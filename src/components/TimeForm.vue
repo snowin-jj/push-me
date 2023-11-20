@@ -15,8 +15,8 @@ function handleSubmit(_e: Event) {
     <form @submit.prevent="handleSubmit" class="flex flex-col items-center gap-2 w-full max-w-xs">
         <label for="minutes"></label>
         <input type="number" name="minutes" id="minutes" v-model="timeStore.minutes"
-            class="w-full max-w-[8rem] text-4xl font-black py-1 px-2 appearance-none text-center bg-transparent" autofocus
-            required>
+            class="w-full max-w-[8rem] text-4xl md:text-6xl md:max-w-[16rem] lg:text-8xl font-black py-1 px-2 appearance-none text-center bg-transparent rounded-none"
+            autofocus required>
         <button type="submit" class="">start</button>
     </form>
 </template>

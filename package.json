@@ -1,7 +1,7 @@
 {
     "name": "push-me",
     "private": true,
-    "version": "0.0.9",
+    "version": "0.1.9",
     "type": "module",
     "scripts": {
         "dev": "vite",
@@ -15,6 +15,7 @@
         "vue": "^3.3.4"
     },
     "devDependencies": {
+        "@iconify/vue": "^4.1.1",
         "@tauri-apps/cli": "^1.5.6",
         "@vitejs/plugin-vue": "^4.2.3",
         "autoprefixer": "^10.4.16",

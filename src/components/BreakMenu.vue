@@ -8,8 +8,11 @@ const timeStore = useTimeStore()
 
 <template>
     <div class="flex flex-col items-center gap-2 text-center">
-        <h1 class="text-xl font-bold text-teal-500">Break Time</h1>
+        <h1 class="text-xl font-bold text-primary">Break Time</h1>
         <p class="text-base px-2">Take some time, Go for a walk.</p>
-        <button @click="timeStore.restart">Ok</button>
+        <div class="flex items-center">
+            <button @click="timeStore.reset">reset</button>
+            <button @click="timeStore.restart">restart</button>
+        </div>
     </div>
 </template>
