@@ -21,7 +21,14 @@
             },
             "window": {
                 "setAlwaysOnTop": true,
-                "setFocus": true
+                "setFocus": true,
+                "startDragging": true
+            },
+            "path": {
+                "all": true
+            },
+            "os": {
+                "all": true
             },
             "notification": {
                 "all": true
@@ -46,7 +53,8 @@
             {
                 "fullscreen": false,
                 "resizable": true,
-                "title": "push-me",
+                "title": "Push Me",
+                "decorations": false,
                 "width": 280,
                 "height": 200,
                 "center": true,

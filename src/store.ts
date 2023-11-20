@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import { appWindow } from '@tauri-apps/api/window';
+import { appDataDir, join } from '@tauri-apps/api/path';
+import { convertFileSrc } from '@tauri-apps/api/tauri';
 import {
     isPermissionGranted,
     requestPermission,
@@ -46,9 +48,10 @@ export const useTimeStore = defineStore('time', () => {
             permissionGranted = permission === 'granted';
         }
         sendNotification({
+            icon: '/icons/32x32.png',
             title: 'Break Time',
             body: 'Take some time! , Go for a walk.',
-            sound: 'Default',
+            sound: 'default',
         });
     }
 
