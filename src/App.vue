@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import { platform } from '@tauri-apps/api/os'
 
 import { useStateStore } from './store'
 import Timer from './components/Timer.vue';
 import BreakMenu from './components/BreakMenu.vue';
 import TimeForm from './components/TimeForm.vue';
-import { onMounted, ref } from 'vue';
 import AppTitleBar from './components/AppTitleBar.vue';
 
 

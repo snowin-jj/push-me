@@ -1,12 +1,9 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
-#![cfg_attr(
-    all(not(debug_assertions), target_os = "windows"),
-    windows_subsystem = "windows"
-)]
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use tauri::Manager;
 // window blur effect
-use window_vibrancy::{apply_acrylic, apply_vibrancy, NSVisualEffectMaterial};
+use window_vibrancy::{apply_blur, apply_vibrancy, NSVisualEffectMaterial};
 
 fn main() {
     tauri::Builder::default()
@@ -14,7 +11,7 @@ fn main() {
             let window = app.get_window("main").unwrap();
 
             #[cfg(target_os = "windows")]
-            apply_acrylic(&window, Some((18, 18, 18, 125)))
+            apply_blur(&window, Some((18, 18, 18, 125)))
                 .expect("Unsupported platform! 'apply_blur' is only supported on Windows");
 
             #[cfg(target_os = "macos")]
