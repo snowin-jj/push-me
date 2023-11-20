@@ -16,7 +16,7 @@ async function handleMinimize() {
 </script>
 
 <template>
-    <div data-tauri-drag-region class="fixed inset-x-0 pt-3 pl-3 flex items-center justify-start gap-1">
+    <div data-tauri-drag-region class="fixed top-0 left-0 pt-3 pl-3 flex items-center justify-start gap-1">
         <button tabindex="-1" id="titlebar-close" class="p-0" @click="handleClose">
             <Icon icon="ph:circle-fill" color="#f95e57" width="18" />
         </button>

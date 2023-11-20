@@ -21,7 +21,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main data-tauri-drag-region class="relative min-h-[100dvh] grid place-items-center" :class="bgColor">
+  <main data-tauri-drag-region class="min-h-[100dvh] grid place-items-center" :class="bgColor">
     <AppTitleBar />
     <Timer v-if="store.state === 'running' || store.state === 'paused'" />
     <BreakMenu v-else-if="store.state === 'break'" />
