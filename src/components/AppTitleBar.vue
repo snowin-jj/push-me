@@ -2,6 +2,7 @@
 import { appWindow } from '@tauri-apps/api/window'
 import { Icon } from '@iconify/vue';
 
+
 async function handleClose() {
     await appWindow.close()
 }
