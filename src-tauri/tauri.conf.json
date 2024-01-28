@@ -32,6 +32,9 @@
             },
             "notification": {
                 "all": true
+            },
+            "os": {
+                "all": false
             }
         },
         "bundle": {

@@ -1,21 +1,35 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import { platform } from '@tauri-apps/api/os';
 
-import { useStateStore } from './store'
+import { useStateStore } from './store';
 import Timer from './components/Timer.vue';
 import BreakMenu from './components/BreakMenu.vue';
 import TimeForm from './components/TimeForm.vue';
 import AppTitleBar from './components/AppTitleBar.vue';
 
+const isBlur = ref(true);
 
-const store = useStateStore()
+onMounted(() => {
+    (async () => {
+        const platformName = await platform();
+        isBlur.value = platformName === 'linux' ? false : true;
+    })();
+});
 
+const store = useStateStore();
 </script>
 
 <template>
-  <main data-tauri-drag-region class="min-h-[100dvh] grid place-items-center">
-    <AppTitleBar />
-    <Timer v-if="store.state === 'running' || store.state === 'paused'" />
-    <BreakMenu v-else-if="store.state === 'break'" />
-    <TimeForm v-else />
-  </main>
+    <main
+        data-tauri-drag-region
+        class="grid min-h-[100dvh] place-items-center"
+        :class="{ 'rounded-xl bg-zinc-800': !isBlur.value }"
+    >
+        <AppTitleBar />
+        <Timer v-if="store.state === 'running' || store.state === 'paused'" />
+        <BreakMenu v-else-if="store.state === 'break'" />
+        <TimeForm v-else />
+    </main>
 </template>
+

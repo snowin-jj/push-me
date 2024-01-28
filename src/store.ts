@@ -48,9 +48,9 @@ export const useTimeStore = defineStore('time', () => {
             } else {
                 clearInterval(intervalId.value);
                 store.changeState('break');
+                await notify();
                 await appWindow.setFocus();
                 await appWindow.setAlwaysOnTop(true);
-                await notify();
             }
         }, 1000);
     }
