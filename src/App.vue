@@ -10,11 +10,13 @@ import AppTitleBar from './components/AppTitleBar.vue';
 
 const isBlur = ref(true);
 
-onMounted(() => {
-    (async () => {
+onMounted(async () => {
+    try {
         const platformName = await platform();
         isBlur.value = platformName === 'linux' ? false : true;
-    })();
+    } catch (error) {
+        console.error('Error retrieving platform:', error);
+    }
 });
 
 const store = useStateStore();
@@ -24,7 +26,7 @@ const store = useStateStore();
     <main
         data-tauri-drag-region
         class="grid min-h-[100dvh] place-items-center"
-        :class="{ 'rounded-xl bg-zinc-800': !isBlur.value }"
+        :class="{ 'rounded-xl bg-zinc-800': !isBlur }"
     >
         <AppTitleBar />
         <Timer v-if="store.state === 'running' || store.state === 'paused'" />
@@ -32,4 +34,3 @@ const store = useStateStore();
         <TimeForm v-else />
     </main>
 </template>
-
